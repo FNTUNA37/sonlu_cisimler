@@ -136,14 +136,8 @@ def birlestirme(k1,k2,k3):
     for a in range(0, height):
         for b in range(0, width):
             GRAY1.append(pix[b, a])
-
-    for c in range(0, height):
-        for d in range(0, width):
-            GRAY2.append(pix2[d, c])
-
-    for e in range(0, height):
-        for f in range(0, width):
-            GRAY3.append(pix3[f, e])
+            GRAY2.append(pix2[b, a])
+            GRAY3.append(pix3[b, a])
 
     newGRAY = cozme(RGB=GRAY1, RGB2=GRAY2,RGB3=GRAY3,k1=k1,k2=k2,k3=k3)
     newim = Image.new("L", (int(width * 2), int(height)))
