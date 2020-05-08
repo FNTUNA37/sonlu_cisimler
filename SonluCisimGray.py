@@ -109,4 +109,4 @@ def resim_bolme(imageName):
     print("şifreleme işlemi bitti...")
 
 olustur()
-resim_bolme("lena.png")
+resim_bolme("test.jpg")

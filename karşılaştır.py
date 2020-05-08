@@ -13,7 +13,7 @@ def load_image(name):
 
 
 
-im = load_image("greyscale.png")
+im = load_image("lena.png")
 im2 = load_image("birlesenResim.png")
 
 width = im.size[0]

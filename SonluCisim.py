@@ -19,6 +19,12 @@ def renk_sifreleme(RGB, kullanici):
         randomIndex += 1
     return list
 
+def newImage(height,width,newRED,newGREEN,newBLUE):
+    newData=[]
+    for i in range(0, int(height*(width/2))):
+        newData.append((newRED[i],newGREEN[i],newBLUE[i]))
+    return newData
+
 def bitfield(n):
     return [int(digit) for digit in bin(n)[2:]]
 
@@ -40,44 +46,18 @@ def sayifield(n):
             sayi+=2**ust
     return sayi
 
-def olustur(i):
-    if i==8:
-        return (x**4+x**3+x**2+1)
-    elif i>8:
-        sonuc=0
-        temp2=0
-        temp=cisim[i-1].as_coefficients_dict()
-        sabit=temp[1]
-        bir=temp[x]
-        iki=temp[x**2]
-        uc=temp[x**3]
-        dort=temp[x**4]
-        bes=temp[x**5]
-        alti=temp[x**6]
-        yedi=temp[x**7]
-        if yedi==1:
-            temp2+=x**4+x**3+x**2+1
-        if alti==1:
-            temp2+=x**7
-        if bes==1:
-            temp2+=x**6
-        if dort==1:
-            temp2+=x**5
-        if uc==1:
-            temp2+=x**4
-        if iki==1:
-            temp2+=x**3
-        if bir==1:
-            temp2+=x**2
-        if sabit==1:
-            temp2+=x
+def olustur():
+    for i in range(2, 256):
+        if i==8:
+            cisim.append(x**4+x**3+x**2+1)
+        elif i>8:
+            cisim.append(duzenle(expand(cisim[i - 1] * x)))
+        else:
+            cisim.append(x**i)
 
-
-        return modlama(temp2)
-
-    else:
-        return x**i
-
+    print("UZAY: " + str(x ** 8 + x ** 4 + x ** 3 + x ** 2 + 1))
+    for a in range(0, len(cisim)):
+        print(str(a) + " --> " + str(cisim[a]))
 
 def modlama(list):
     if list == 0:
@@ -97,22 +77,17 @@ def duzenle(n):
     sonuc = 0
     temp = n.as_coefficients_dict()
     sonuc += temp[1]
-    if len(Cisim) < maxIndex:
-        for deger in range(1, len(Cisim)):
-            sonuc+=(temp[x**deger]%2)*Cisim[deger]
+    if len(cisim) < maxIndex:
+        for deger in range(1, len(cisim)):
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
     else:
         for deger in range(1, maxIndex):
-            sonuc+=(temp[x**deger]%2)*Cisim[deger]
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
 
     return modlama(sonuc)
 
-
-
-def load_image(name):
-    return Image.open(name)
-
 def resim_bolme(imageName):
-    im = load_image(imageName)
+    im = Image.open(imageName)
 
     width = im.size[0]
     height = im.size[1]
@@ -139,7 +114,7 @@ def resim_bolme(imageName):
         newGREEN = renk_sifreleme(RGB=GREEN, kullanici=v)
         print(str(v) + " BLUE")
         newBLUE = renk_sifreleme(RGB=BLUE, kullanici=v)
-        newData = newImageBolme(height, width, newRED, newGREEN, newBLUE)
+        newData = newImage(height, width, newRED, newGREEN, newBLUE)
         newim = Image.new("RGB", (int(width / 2), int(height)))
         newim.putdata(data=newData)
         newim.save(str(v) + ".png")
@@ -147,11 +122,5 @@ def resim_bolme(imageName):
 
 cisim=[0,x]
 rand = []
-for i in range(1,256):
-    cisim.append(olustur(i))
-
-
-print("UZAY: " +str(x**8+x**4+x**3+x**2+1))
-for a in range(0,len(cisim)):
-        print(str(a)+" --> "+str(cisim[a]))
+olustur()
 resim_bolme("lena.png")

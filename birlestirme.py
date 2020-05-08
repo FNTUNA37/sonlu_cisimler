@@ -3,46 +3,35 @@ from sympy import poly
 from sympy.abc import x,y
 from sympy import *
 from PIL import Image
+from datetime import datetime
 import os
 
-def olustur(i):
-    if i==8:
-        return (x**4+x**3+x**2+1)
-    elif i>8:
-        sonuc=0
-        temp2=0
-        temp=cisim[i-1].as_coefficients_dict()
-        sabit=temp[1]
-        bir=temp[x]
-        iki=temp[x**2]
-        uc=temp[x**3]
-        dort=temp[x**4]
-        bes=temp[x**5]
-        alti=temp[x**6]
-        yedi=temp[x**7]
-        if yedi==1:
-            temp2+=x**4+x**3+x**2+1
-        if alti==1:
-            temp2+=x**7
-        if bes==1:
-            temp2+=x**6
-        if dort==1:
-            temp2+=x**5
-        if uc==1:
-            temp2+=x**4
-        if iki==1:
-            temp2+=x**3
-        if bir==1:
-            temp2+=x**2
-        if sabit==1:
-            temp2+=x
+def olustur():
+    for i in range(2, 256):
+        if i==8:
+            cisim.append(x**4+x**3+x**2+1)
+        elif i>8:
+            cisim.append(duzenle(expand(cisim[i - 1] * x)))
+        else:
+            cisim.append(x**i)
 
+    print("UZAY: " + str(x ** 8 + x ** 4 + x ** 3 + x ** 2 + 1))
+    for a in range(0, len(cisim)):
+        print(str(a) + " --> " + str(cisim[a]))
 
-        return modlama(temp2)
-
+def duzenle(n):
+    maxIndex = 12
+    sonuc = 0
+    temp = n.as_coefficients_dict()
+    sonuc += temp[1]
+    if len(cisim) < maxIndex:
+        for deger in range(1, len(cisim)):
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
     else:
-        return x**i
+        for deger in range(1, maxIndex):
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
 
+    return modlama(sonuc)
 
 def modlama(list):
     if list == 0:
@@ -64,7 +53,6 @@ def eslenik(sayi):
         sonuc=sayi
     return sonuc
 
-
 def bitfield(n):
     return [int(digit) for digit in bin(n)[2:]]
 
@@ -84,8 +72,6 @@ def kontrol(sayi):
         return sayi%255
 
 def cozme(RGB,RGB2,RGB3,k1,k2,k3):
-
-
     list = []
     k1 = xfield(k1)
     k2 = xfield(k2)
@@ -93,7 +79,6 @@ def cozme(RGB,RGB2,RGB3,k1,k2,k3):
     k1 = cisim.index(k1)
     k2 = cisim.index(k2)
     k3 = cisim.index(k3)
-
     for i in range(0,len(RGB)):
         pixel = cisim.index(xfield(RGB[i]))
         pixel2 = cisim.index(xfield(RGB2[i]))
@@ -120,17 +105,14 @@ def cozme(RGB,RGB2,RGB3,k1,k2,k3):
             ucuncuDenklem = kontrol(ucuncuCarpan + cisim.index(modlama(expand((cisim[k1] + cisim[k2]))))) * y + kontrol(k1 + k2 + ucuncuCarpan)
         ucuncuDenklem = ucuncuDenklem.as_coefficients_dict()
 
-
         # kare=(modlama((cisim[birinciDenklem[y ** 2]])+(cisim[ikinciDenklem[y**2]])+(cisim[ucuncuDenklem[y**2]])).subs(x,2))
         bir = (modlama((cisim[birinciDenklem[y]]) + (cisim[ikinciDenklem[y]]) + (cisim[ucuncuDenklem[y]])).subs(x,2))
         sabit = (modlama((cisim[birinciDenklem[1]]) + (cisim[ikinciDenklem[1]]) + (cisim[ucuncuDenklem[1]])).subs(x,2))
         list.append(bir)
         list.append(sabit)
-
     return list
 
-
-def newImageBirlestirme(height,width,newRED,newGREEN,newBLUE):
+def renkBirlestirme(height,width,newRED,newGREEN,newBLUE):
     newData=[]
     for i in range(0, (height*(width*2))):
         newData.append((newRED[i],newGREEN[i],newBLUE[i]))
@@ -162,42 +144,29 @@ def birlestirme(k1,k2,k3):
         for b in range(0, width):
             RGB = []
             RGB.append(pix[b, a])
+            RGB.append(pix2[b, a])
+            RGB.append(pix3[b, a])
             RED1.append(RGB[0][0])
             GREEN1.append(RGB[0][1])
             BLUE1.append(RGB[0][2])
-
-    for c in range(0, height):
-        for d in range(0, width):
-            RGB = []
-            RGB.append(pix2[d, c])
-            RED2.append(RGB[0][0])
-            GREEN2.append(RGB[0][1])
-            BLUE2.append(RGB[0][2])
-
-    for e in range(0, height):
-        for f in range(0, width):
-            RGB = []
-            RGB.append(pix3[f, e])
-            RED3.append(RGB[0][0])
-            GREEN3.append(RGB[0][1])
-            BLUE3.append(RGB[0][2])
-
+            RED2.append(RGB[1][0])
+            GREEN2.append(RGB[1][1])
+            BLUE2.append(RGB[1][2])
+            RED3.append(RGB[2][0])
+            GREEN3.append(RGB[2][1])
+            BLUE3.append(RGB[2][2])
 
     newRED = cozme(RGB=RED1, RGB2=RED2,RGB3=RED3,k1=k1,k2=k2,k3=k3)
     newGREEN = cozme(RGB=GREEN1, RGB2=GREEN2, RGB3=GREEN3,k1=k1,k2=k2,k3=k3)
     newBLUE = cozme(RGB=BLUE1, RGB2=BLUE2, RGB3=BLUE3,k1=k1,k2=k2,k3=k3)
-    newData=newImageBirlestirme(height,width,newRED,newGREEN,newBLUE)
+    newData=renkBirlestirme(height,width,newRED,newGREEN,newBLUE)
     newim = Image.new("RGB", (int(width * 2), int(height)))
     newim.putdata(data=newData)
     newim.save("birlesenResim.png")
 
-cisim=[0]
-for i in range(1,256):
-    cisim.append(olustur(i))
-
-print("UZAY: " +str(x**8+x**4+x**3+x**2+1))
-for a in range(0,len(cisim)):
-        print(str(a)+" --> "+str(cisim[a]))
-
-
+baslangic=datetime.now()
+cisim=[0,x]
+olustur()
 birlestirme(2,3,5)
+bitis=datetime.now()
+print(bitis-baslangic)

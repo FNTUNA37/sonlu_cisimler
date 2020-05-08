@@ -6,43 +6,32 @@ from sympy import *
 from PIL import Image
 import os
 
-def olustur(i):
-    if i==8:
-        return (x**4+x**3+x**2+1)
-    elif i>8:
-        sonuc=0
-        temp2=0
-        temp=cisim[i-1].as_coefficients_dict()
-        sabit=temp[1]
-        bir=temp[x]
-        iki=temp[x**2]
-        uc=temp[x**3]
-        dort=temp[x**4]
-        bes=temp[x**5]
-        alti=temp[x**6]
-        yedi=temp[x**7]
-        if yedi==1:
-            temp2+=x**4+x**3+x**2+1
-        if alti==1:
-            temp2+=x**7
-        if bes==1:
-            temp2+=x**6
-        if dort==1:
-            temp2+=x**5
-        if uc==1:
-            temp2+=x**4
-        if iki==1:
-            temp2+=x**3
-        if bir==1:
-            temp2+=x**2
-        if sabit==1:
-            temp2+=x
+def olustur():
+    for i in range(2, 256):
+        if i==8:
+            cisim.append(x**4+x**3+x**2+1)
+        elif i>8:
+            cisim.append(duzenle(expand(cisim[i - 1] * x)))
+        else:
+            cisim.append(x**i)
 
+    print("UZAY: " + str(x ** 8 + x ** 4 + x ** 3 + x ** 2 + 1))
+    for a in range(0, len(cisim)):
+        print(str(a) + " --> " + str(cisim[a]))
 
-        return modlama(temp2)
-
+def duzenle(n):
+    maxIndex = 12
+    sonuc = 0
+    temp = n.as_coefficients_dict()
+    sonuc += temp[1]
+    if len(cisim) < maxIndex:
+        for deger in range(1, len(cisim)):
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
     else:
-        return x**i
+        for deger in range(1, maxIndex):
+            sonuc+=(temp[x**deger]%2)*cisim[deger]
+
+    return modlama(sonuc)
 
 def modlama(list):
     if list==0:
@@ -83,7 +72,6 @@ def kontrol(sayi):
         return sayi%255
 
 def cozme(RGB,RGB2,RGB3,k1,k2,k3):
-
     list = []
     k1 = xfield(k1)
     k2 = xfield(k2)
@@ -126,12 +114,6 @@ def cozme(RGB,RGB2,RGB3,k1,k2,k3):
 
     return list
 
-def newImageBirlestirme(height,width,newGRAY):
-    newData=[]
-    for i in range(0, (height*(width*2))):
-        newData.append((newGRAY[i]))
-    return newData
-
 def birlestirme(k1,k2,k3):
     im = Image.open(str(k1) + '.png')
     im2 = Image.open(str(k2) + '.png')
@@ -164,19 +146,11 @@ def birlestirme(k1,k2,k3):
             GRAY3.append(pix3[f, e])
 
     newGRAY = cozme(RGB=GRAY1, RGB2=GRAY2,RGB3=GRAY3,k1=k1,k2=k2,k3=k3)
-    newData=newImageBirlestirme(height,width,newGRAY)
     newim = Image.new("L", (int(width * 2), int(height)))
-    newim.putdata(data=newData)
+    newim.putdata(data=newGRAY)
     newim.save("birlesenResim.png")
 
-cisim=[0]
-for i in range(1,256):
-    cisim.append(olustur(i))
-
-print("UZAY: " +str(x**8+x**4+x**3+x**2+1))
-for a in range(0,len(cisim)):
-        print(str(a)+" --> "+str(cisim[a]))
-
-
+cisim=[0,x]
+olustur()
 birlestirme(1,3,5)
 print('finish')
