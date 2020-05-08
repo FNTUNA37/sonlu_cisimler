@@ -1,6 +1,6 @@
 BAŞLA
 
-1.Adım : cisim elemanlarının tutulucağı listeyi tanımla ve ilk iki elemanını 0 ve x yap.
+1.Adım : cisim elemanlarının tutulacağı listeyi tanımla ve ilk iki elemanını 0 ve x yap.
 2.Adım : olustur fonksiyonunu çalıştır.
 3.Adım : birleştirme fonksiyona 3 tane kullanıcı numarası vererek çalıştır.
 
@@ -16,7 +16,7 @@ OLUSTUR FONKSİYONU ADIMLARI:
                 4.Adım : cisim listesine x üssü i yi ekle.
 
   2.Adım : Ekrana hangi uzayda çalışıldığını yaz.
-  3.Adım : Ekrana Cisim listesindeli elemanları index numaraları ile beraber yaz.
+  3.Adım : Ekrana Cisim listesindeki elemanları index numaraları ile beraber yaz.
   BİTTİ
 
 
@@ -30,27 +30,27 @@ BİRLEŞTİRME FONKSİYONU ADIMLARI:
 
 COZME FONKSİYONU ADIMLARI:
   BASLA
-  1.Adım : oluşucak pixelleri tutmak için liste oluştur.(list)
+  1.Adım : oluşacak pixelleri tutmak için liste oluştur.(list)
   2.Adım : Kullanıcı numaralarını ikilik tabanda x formatına çevir.
   3.Adım : Pixeller bitene kadar 4 ve 5.adımları uygula.
-  4.Adım : 3 kullanıcı içinde pixel ve kullancı numaralarını alıp Lagrange İnterpolasyon uygula
-  5.Adım : Lagrange İnterpolasyon sonucu oluşan denlemde x in katsayısını ve sabit değeri modlama fonksiyona yollayıp list'e ekle.
+  4.Adım : 3 kullanıcı içinde pixel ve kullanıcı numaralarını alıp Lagrange İnterpolasyon uygula
+  5.Adım : Lagrange İnterpolasyon sonucu oluşan denklemde x in katsayısını ve sabit değeri modlama fonksiyona yollayıp list'e ekle.
   6.Adım : list dizisini döndür.
   BİTTİ
 
   DUZENLE FONKSİYONU ADIMLARI:
     BAŞLA
-    1.Adım : Oluşucak ifadeyi tutmak için değişken tanımla.(sonuc)
+    1.Adım : Oluşacak ifadeyi tutmak için değişken tanımla.(sonuc)
     2.Adım : Gelen ifadenin her değeri için 3.Adımı uygula.
     3.Adım : Değerin cisim uzayındaki karşılığını sonuc a ekle.
     4.Adım : sonuc'u modlama fonksiyona gönder.
     5.Adım : sonuc'u döndür.
-    BİTTi
+    BİTTİ
 
-    
+
 MODLAMA FONKSİYONU ADIMLARI:
     BAŞLA
-    1.Adım : oluşucak ifadeyi tutmak için değişken tanımla.(sonuc)
+    1.Adım : oluşacak ifadeyi tutmak için değişken tanımla.(sonuc)
     2.Adım : Gelen ifadenin her değeri için 3.Adımı uygula.
     3.Adım : ifadedeki elemanların katsayılarının 2 ye göre modunu alıp elemanla birlikte sonuc'a ekle.
     4.Adım : sonuc'u döndür.

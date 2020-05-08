@@ -1,9 +1,9 @@
 BAŞLA
 
-1.Adım : cisim elemanlarının tutulucağı listeyi tanımla ve ilk iki elemanını 0 ve x yap.(Cisim)
-2.Adım : Rastgele sayıların tutulucağı listeyi tanımla.(rand)
+1.Adım : cisim elemanlarının tutulacağı listeyi tanımla ve ilk iki elemanını 0 ve x yap.(Cisim)
+2.Adım : Rastgele sayıların tutulacağı listeyi tanımla.(rand)
 3.Adım : olustur fonksiyonunu çalıştır.
-4.Adım : resim_bolme fonsiyonunu şifrelenicek resimi vererek çalıştır.
+4.Adım : resim_bolme fonksiyonunu şifrelenecek resmi vererek çalıştır.
 
 BİTTİ
 
@@ -17,17 +17,17 @@ OLUSTUR FONKSİYONU ADIMLARI:
                 4.Adım : cisim listesine x üssü i yi ekle.
 
   2.Adım : Ekrana hangi uzayda çalışıldığını yaz.
-  3.Adım : Ekrana Cisim listesindeli elemanları index numaraları ile beraber yaz.
+  3.Adım : Ekrana Cisim listesindeki elemanları index numaraları ile beraber yaz.
   BİTTİ
 
 
 RESİM_BOLME FONKSİYONU ADIMLARI:
   BAŞLA
-  1.Adım : Resimin pixellerini, yüksekliğini ve genişliğini değişkenlere al.
-  2.Adım : Rastgele sayıların tutulduğu listeyi resimin toplam pixel sayısının yarısı kadar 0 ile 256 arası sayılarla Rastgele doldur.
+  1.Adım : Resmin pixellerini, yüksekliğini ve genişliğini değişkenlere al.
+  2.Adım : Rastgele sayıların tutulduğu listeyi resmin toplam pixel sayısının yarısı kadar 0 ile 256 arası sayılarla Rastgele doldur.
   3.Adım : 4. ve 5. adımları 5 kere tekrarla.
-  4.Adım : Resimin pixellerini ve kullanıcı numarasını renk_sifreleme isimli fonksiyona yolla.
-  5.Adım : Gelen şifrelenmiş pixelleri kullanıcı numarası ile isimlenirip yeni bir resim olarak kaydet
+  4.Adım : Resmin pixellerini ve kullanıcı numarasını renk_sifreleme isimli fonksiyona yolla.
+  5.Adım : Gelen şifrelenmiş pixelleri kullanıcı numarası ile isimlendirip yeni bir resim olarak kaydet
   BİTTİ
 
 
@@ -45,7 +45,7 @@ RENK_SİFRELEME FONKSİYONU ADIMLARI:
 
 DUZENLE FONKSİYONU ADIMLARI:
   BAŞLA
-  1.Adım : Oluşucak ifadeyi tutmak için değişken tanımla.(sonuc)
+  1.Adım : Oluşacak ifadeyi tutmak için değişken tanımla.(sonuc)
   2.Adım : Gelen ifadenin her değeri için 3.Adımı uygula.
   3.Adım : Değerin cisim uzayındaki karşılığını sonuc a ekle.
   4.Adım : sonuc'u modlama fonksiyona gönder.
@@ -54,8 +54,9 @@ DUZENLE FONKSİYONU ADIMLARI:
 
 MODLAMA FONKSİYONU ADIMLARI:
   BAŞLA
-  1.Adım : oluşucak ifadeyi tutmak için değişken tanımla.(sonuc)
+  1.Adım : oluşacak ifadeyi tutmak için değişken tanımla.(sonuc)
   2.Adım : Gelen ifadenin her değeri için 3.Adımı uygula.
   3.Adım : ifadedeki elemanların katsayılarının 2 ye göre modunu alıp elemanla birlikte sonuc'a ekle.
   4.Adım : sonuc'u döndür.
   BİTTİ
+
